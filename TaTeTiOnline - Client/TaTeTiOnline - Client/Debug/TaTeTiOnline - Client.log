@@ -1,0 +1,5 @@
+﻿  stdafx.cpp
+  TTTO_Client.cpp
+C:\Users\Nicolas\Documents\Clones\UDP_Server\TaTeTiOnline - Client\TaTeTiOnline - Client\TTTO_Client.cpp(91,23): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  TaTeTiOnline - Client.vcxproj -> C:\Users\Nicolas\Documents\Clones\UDP_Server\TaTeTiOnline - Client\Debug\TaTeTiOnline - Client.exe

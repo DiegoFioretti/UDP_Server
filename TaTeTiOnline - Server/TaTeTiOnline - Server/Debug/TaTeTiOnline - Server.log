@@ -1,0 +1,8 @@
+﻿  stdafx.cpp
+  TTTO_Server.cpp
+C:\Users\Nicolas\Documents\Clones\UDP_Server\TaTeTiOnline - Server\TaTeTiOnline - Server\TTTO_Server.cpp(90,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nicolas\Documents\Clones\UDP_Server\TaTeTiOnline - Server\TaTeTiOnline - Server\TTTO_Server.cpp(426,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nicolas\Documents\Clones\UDP_Server\TaTeTiOnline - Server\TaTeTiOnline - Server\TTTO_Server.cpp(482,11): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+  Generating Code...
+C:\Users\Nicolas\Documents\Clones\UDP_Server\TaTeTiOnline - Server\TaTeTiOnline - Server\TTTO_Server.cpp(325): warning C4715: 'CheckIfWinnerInRoom': not all control paths return a value
+  TaTeTiOnline - Server.vcxproj -> C:\Users\Nicolas\Documents\Clones\UDP_Server\TaTeTiOnline - Server\Debug\TaTeTiOnline - Server.exe
