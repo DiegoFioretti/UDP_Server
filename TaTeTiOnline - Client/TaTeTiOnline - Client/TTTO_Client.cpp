@@ -1,22 +1,16 @@
-#include "stdafx.h"
 #include <conio.h>
 #include <time.h>
 #include <iostream>
-
-/*
-Simple udp client
-Silver Moon (m00n.silv3r@gmail.com)
-*/
 
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 #include<stdio.h>
 #include<winsock2.h>
 
-#pragma comment(lib,"ws2_32.lib") //Winsock Library
-#define SERVER "127.0.0.1"  //ip address of udp server
-#define BUFLEN 512  //Max length of buffer
-#define PORT 8888   //The port on which to listen for incoming data
+#pragma comment(lib,"ws2_32.lib")	//Winsock Library
+#define SERVER "127.0.0.1"			//IP address of udp server (set to default)
+#define BUFLEN 512					//Max length of buffer
+#define PORT 8888					//Port on which to listen for incoming data (set to default)
 
 using namespace std;
 
@@ -46,7 +40,7 @@ int main(void)
 	}
 
 	//setup address structure
-	memset((char *)&si_other, 0, sizeof(si_other));
+	memset((char*)&si_other, 0, sizeof(si_other));
 	si_other.sin_family = AF_INET;
 	si_other.sin_port = htons(PORT);
 	si_other.sin_addr.S_un.S_addr = inet_addr(SERVER);
@@ -56,22 +50,15 @@ int main(void)
 	int point = 0;
 	memset(message, '\0', BUFLEN);
 	printf("Welcome to TTTO, you need to #login + a username to start playing\n");
+
+	FD_SET fds;
+	struct timeval tv;
+	int n;
 	while (1) {
-
-		//send the message
-		/*
-		if (sendto(s, message, strlen(message), 0, (struct sockaddr *) &si_other, slen) == SOCKET_ERROR)
-		{
-		printf("sendto() failed with error code : %d", WSAGetLastError());
-		exit(EXIT_FAILURE);
-		}*/
-		//point = 0;
-
 		while (_kbhit()) {
 			char cur = _getch();
 			if (cur == 13) {
-				//message[point + 1] = '\n';
-				if (sendto(s, message, strlen(message), 0, (struct sockaddr *) &si_other, slen) == SOCKET_ERROR)
+				if (sendto(s, message, strlen(message), 0, (struct sockaddr*)&si_other, slen) == SOCKET_ERROR)
 				{
 					printf("sendto() failed with error code : %d", WSAGetLastError());
 					exit(EXIT_FAILURE);
@@ -113,29 +100,25 @@ int main(void)
 		//receive a reply and print it
 		//clear the buffer by filling null, it might have previously received data
 
-		FD_SET fds;
-		struct timeval tv;
-
 		FD_ZERO(&fds);
 		FD_SET(s, &fds);
 
 		tv.tv_sec = 0;
 		tv.tv_usec = 30000;
 
-		int n = select(s, &fds, NULL, NULL, &tv);
+		n = select(s, &fds, NULL, NULL, &tv);
 		memset(buf, '\0', BUFLEN);
 
 		//try to receive some data, this is a blocking call
 		if (n > 0) {
 			memset(buf, '\0', BUFLEN);
-			if (recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen) == SOCKET_ERROR) {
+			if (recvfrom(s, buf, BUFLEN, 0, (struct sockaddr*)&si_other, &slen) == SOCKET_ERROR) {
 				printf("recvfrom() failed with error code : %d", WSAGetLastError());
 				exit(EXIT_FAILURE);
 			}
 			puts(buf);
 		}
 		else if (n == 0) {
-			//printf("\rEnter message: ", buf);
 			cout << "\rEnter message : " << message;
 		}
 		else if (n < 0) {
